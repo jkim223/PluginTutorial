@@ -1,0 +1,8 @@
+prefix=/home/jskim/catkin_ws/src/plugin_tutorial/build/devel
+
+Name: plugin_tutorial
+Description: Description of plugin_tutorial
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jskim/catkin_ws/src/plugin_tutorial/build/devel/lib 
+Requires: roscpp gazebo_ros
