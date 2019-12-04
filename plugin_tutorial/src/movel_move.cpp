@@ -60,37 +60,41 @@ namespace gazebo
           if(this->link_name.compare("link1") == 0){
               obstacle_index = 1;
           }
-
           else if(this->link_name.compare("link2") == 0){
               obstacle_index = 2;
           }
-
           else if(this->link_name.compare("link3") == 0){
               obstacle_index = 3;
           }
-
           else if(this->link_name.compare("link4") == 0){
               obstacle_index = 4;
           }
-
           else if(this->link_name.compare("link5") == 0){
               obstacle_index = 5;
+          }
+          else if(this->link_name.compare("link6") == 0){
+              obstacle_index = 6;
           }
 
 
           switch(obstacle_index){
           case 1:
+              vel_linear_x = -0.2;  vel_linear_y = 0.2;
+              break;
           case 4:
               vel_linear_x = 0.1;  vel_linear_y = -0.1;
               break;
           case 3:
-              vel_linear_x = 0.3;   vel_linear_y = 0.0;
+              vel_linear_x = 0.2;   vel_linear_y = 0.0;
               break;
           case 2:
-              vel_linear_x = 0.0;   vel_linear_y = 0.3;
+              vel_linear_x = 0.0;   vel_linear_y = 0.2;
               break;
           case 5:
-              vel_linear_x = -0.1;   vel_linear_y = 0.2;
+              vel_linear_x = -0.2;   vel_linear_y = -0.2;
+              break;
+          case 6:
+              vel_linear_x = 0.2;   vel_linear_y = 0.2;
               break;
           default:
               break;
@@ -106,27 +110,6 @@ namespace gazebo
           if(_info.simTime - this->prevUpdate > this->updatePeriod){ //enough time has elapsed
 
               vel_linear_x *= -1;   vel_linear_y *= -1;     vel_linear_z = 0;
-
-//              if(obstacle_index == 2){
-//                  vel_linear_x *= -1;   vel_linear_y *= -1;     vel_linear_z = 0;
-//              }
-
-//              else if(obstacle_index == 3){
-//                    vel_linear_x *= -1;   vel_linear_y *= -1;     vel_linear_z = 0;
-//              }
-              /*
-              //set velocity
-              if(flag == false){
-                  vel_linear_x *= -1;   vel_linear_y *= -1;     vel_linear_z = 0;
-
-                  flag = true;
-              }
-              else{
-                    vel_linear_z = 0;
-
-                  flag = false;
-              }
-              */
 
               this->prevUpdate = _info.simTime;
           }
