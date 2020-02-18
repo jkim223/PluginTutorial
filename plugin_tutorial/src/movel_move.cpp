@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * Modified by: Jeeseon Kim
 */
 
 #include <boost/bind.hpp>
@@ -39,12 +40,9 @@ namespace gazebo
           // Store the pointer to the model
           this->model = _parent;
 
-
           // Listen to the update event. This event is broadcast every simulation iteration.
           this->updateConnection = event::Events::ConnectWorldUpdateBegin(
               boost::bind(&ModelPush::OnUpdate, this, _1));
-
-
 
           // Set the update period
           if (_sdf->HasElement("update_period")){
@@ -56,7 +54,7 @@ namespace gazebo
               this->link_name = _sdf->Get<std::string>("link");
           }
 
-
+		  //###
           if(this->link_name.compare("link1") == 0){
               obstacle_index = 1;
           }
@@ -77,7 +75,7 @@ namespace gazebo
           }
 
 
-          switch(obstacle_index){
+          switch(obstacle_index){	//assign linear velocity to the model
           case 1:
               vel_linear_x = -0.2;  vel_linear_y = 0.2;
               break;
@@ -105,8 +103,7 @@ namespace gazebo
       // Called by the world update start event
       public: void OnUpdate(const common::UpdateInfo & _info)
       {
-
-
+		  
           if(_info.simTime - this->prevUpdate > this->updatePeriod){ //enough time has elapsed
 
               vel_linear_x *= -1;   vel_linear_y *= -1;     vel_linear_z = 0;
@@ -116,10 +113,8 @@ namespace gazebo
 
               // Apply a small linear velocity to the model.
               this->model->SetLinearVel(math::Vector3(vel_linear_x, vel_linear_y, vel_linear_z));
-
       }
-
-
+			
 
       public: void OnRosMsg_x_speed(const std_msgs::Float32ConstPtr &_msg)
       {
@@ -133,7 +128,6 @@ namespace gazebo
       }
 
 
-
       private: physics::ModelPtr model; // Pointer to the model
       private: common::Time updatePeriod;
       private: common::Time prevUpdate;
@@ -141,9 +135,10 @@ namespace gazebo
 
       private: event::ConnectionPtr updateConnection;   // Pointer to the update event connection
       private: std::string link_name;
-
+	
+	  //###
       private:
-          int obstacle_index;
+          int obstacle_index;	//index to assign different linear velocity
 
       private:
         float vel_linear_x = 0;
