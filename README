@@ -1,5 +1,4 @@
 movel_move.cpp file under /plugin_tutorial offers a plugin for ROS gazebo models. 4 world files under /worlds include models that applied the plugin (models move with given linear velocity).
 
-![3obs](https://user-images.githubusercontent.com/56469026/74751272-5c087000-52b0-11ea-8721-d6fc27037546.jpg)
-
+![3obs](./img/3obs.jpg)
 This plugin was successfully tested in Ubuntu 16.04/ ROS Kinetic.
